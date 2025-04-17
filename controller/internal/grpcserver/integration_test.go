@@ -13,6 +13,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
+
 func startTestServer(t *testing.T) (string, func()) {
 	cfg := config.Load()
 	cfg.Host = "localhost"
