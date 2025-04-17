@@ -1,0 +1,24 @@
+run:
+  modules-dir: controller
+
+linters:
+  enable:
+    - gofmt
+    - govet
+
+issues:
+  exclude-dirs:
+    - pkg/proto
+    - internal/gen
+    - controller/pkg/proto
+    - controller/internal/gen
+
+  exclude-rules:
+    - path: '.*\.pb\.go$'
+      linters:
+        - govet
+        - gofmt
+    - path: '.*_grpc\.pb\.go$'
+      linters:
+        - govet
+        - gofmt
