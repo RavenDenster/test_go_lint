@@ -9,5 +9,5 @@ issues:
     - pkg/proto  
 
   exclude-rules:
-    - path: ".*\.pb\.go$"       # Исключает все .pb.go файлы
-    - path: ".*_grpc\.pb\.go$"
+    - path: '.*\.pb\.go$'
+    - path: '.*_grpc\.pb\.go$' 
