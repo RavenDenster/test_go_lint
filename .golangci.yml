@@ -4,10 +4,16 @@ linters:
     - govet
 
 issues:
-  # Новый формат исключения директорий (вместо устаревшего run.skip-dirs)
   exclude-dirs:
-    - pkg/proto  
+    - pkg/proto
+    - internal/gen
 
   exclude-rules:
     - path: '.*\.pb\.go$'
-    - path: '.*_grpc\.pb\.go$' 
+      linters:
+        - govet
+        - gofmt
+    - path: '.*_grpc\.pb\.go$'
+      linters:
+        - govet
+        - gofmt
