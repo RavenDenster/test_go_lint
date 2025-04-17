@@ -17,14 +17,6 @@ jobs:
       - name: Install Protobuf Compiler
         run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
 
-      - name: Install Go dependencies
-        run: |
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-          go get -u google.golang.org/protobuf
-          go get -u google.golang.org/grpc
-          go get github.com/joho/godotenv
-
       - name: Setup PATH
         run: echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
 
