@@ -3,21 +3,11 @@ linters:
     - gofmt
     - govet
 
-run:
-  # Пропускаем директории со сгенерированным кодом
-  skip-dirs:
-    - "**/proto"
-    - "**/pkg/proto" 
-
 issues:
+  # Новый формат исключения директорий (вместо устаревшего run.skip-dirs)
+  exclude-dirs:
+    - pkg/proto  
+
   exclude-rules:
-    - path: ".*\\.pb\\.go$"
-      linters:
-        - govet
-    - path: ".*_grpc\\.pb\\.go$"
-      linters:
-        - govet
-    - path: ".*/proto/.*"
-      linters:
-        - gofmt
-        - govet
+    - path: ".*\.pb\.go$"       # Исключает все .pb.go файлы
+    - path: ".*_grpc\.pb\.go$"
