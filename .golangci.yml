@@ -1,3 +1,6 @@
+run:
+  modules-dir: controller
+
 linters:
   enable:
     - gofmt
@@ -7,6 +10,8 @@ issues:
   exclude-dirs:
     - pkg/proto
     - internal/gen
+    - controller/pkg/proto
+    - controller/internal/gen
 
   exclude-rules:
     - path: '.*\.pb\.go$'
