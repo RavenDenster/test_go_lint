@@ -2,3 +2,22 @@ linters:
   enable:
     - gofmt
     - govet
+
+run:
+  # Пропускаем директории со сгенерированным кодом
+  skip-dirs:
+    - "**/proto"
+    - "**/pkg/proto" 
+
+issues:
+  exclude-rules:
+    - path: ".*\\.pb\\.go$"
+      linters:
+        - govet
+    - path: ".*_grpc\\.pb\\.go$"
+      linters:
+        - govet
+    - path: ".*/proto/.*"
+      linters:
+        - gofmt
+        - govet
