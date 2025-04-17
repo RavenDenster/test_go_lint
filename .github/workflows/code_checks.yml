@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   go_checks:
-    name: Go Linting
+    name: Go Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,6 +13,29 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.21'
+
+      - name: Install Protobuf Compiler
+        run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
+
+      - name: Install Go dependencies
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+          go get -u google.golang.org/protobuf
+          go get -u google.golang.org/grpc
+          go get github.com/joho/godotenv
+
+      - name: Setup PATH
+        run: echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+
+      - name: Generate Protobuf code
+        run: |
+          protoc \
+            --plugin=protoc-gen-go=$(which protoc-gen-go) \
+            --plugin=protoc-gen-go-grpc=$(which protoc-gen-go-grpc) \
+            --go_out=. --go_opt=paths=source_relative \
+            --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+            pkg/proto/file_service/file_service.proto
 
       - name: Install golangci-lint
         run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
